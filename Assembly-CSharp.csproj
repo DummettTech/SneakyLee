@@ -57,7 +57,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\gameController.cs" />
     <Compile Include="Assets\Scripts\guardMovement.cs" />
-    <Compile Include="Assets\Scripts\playerController.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>M:/SneakyLee/SneakyLee/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
