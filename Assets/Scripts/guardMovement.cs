@@ -4,19 +4,21 @@ using System.Collections;
 
 public class guardMovement : MonoBehaviour {
 
-	public float speed = 6.0f;
     float persueSpeed;
     GameObject playerObject;
     GameObject[] waypoints;
     NavMeshAgent agent;
     bool foundPlayer = false;
+    public string route = "";
 
     int currentWaypoint = 0;
 
     void Start () {
+
+        string routeName = "Waypoint" + route;
 		playerObject = GameObject.FindGameObjectWithTag ("Player");
 		agent = GetComponent<NavMeshAgent> ();
-        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        waypoints = GameObject.FindGameObjectsWithTag(routeName);
 
         persueSpeed = agent.speed + 2.0f;
 	}
@@ -56,7 +58,6 @@ public class guardMovement : MonoBehaviour {
 
         agent.destination = waypoints[currentWaypoint].transform.position;
         currentWaypoint = currentWaypoint + 1;
- 
     }
 
 	void persuePlayer() {
