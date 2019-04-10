@@ -5,18 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class gameController : MonoBehaviour {
 
-	void OnCollisionEnter(Collision col)
-	{
-        string[] levelNames = {"level_1", "level_2" };
-        int currentLevel = 0;
+    Animator anim;
 
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Key")
+        {
+            col.gameObject.GetComponent<Animator>().SetTrigger("Collected");
+        }
+    }
+
+    void OnCollisionEnter(Collision col)
+	{
 		if (col.gameObject.tag == "Guard") 
 		{
 			// Game Over
 			RestartGame();
 		}
 
-		if (col.gameObject.tag == "Exit") 
+        string[] levelNames = { "level_1", "level_2" };
+        int currentLevel = 0;
+        if (col.gameObject.tag == "Exit") 
 		{
             // Next Level / WIN!
             currentLevel = currentLevel + 1;
