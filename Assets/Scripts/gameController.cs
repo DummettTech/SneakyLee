@@ -49,31 +49,26 @@ public class gameController : MonoBehaviour {
         }
     }
 
+    static int currentLevel = 0;
+    string[] levelNames = { "level_1", "level_2", "level_3" };
+
     void OnCollisionEnter(Collision col)
 	{
-
 		if (col.gameObject.tag == "Guard") 
 		{
 			// Game Over
 			RestartGame();
 		}
-
-        string[] levelNames = { "level_1", "level_2", "level_3" };
-        int currentLevel = 0;
+  
         if (col.gameObject.tag == "Exit" && !isLocked) 
 		{
             // Next Level / WIN!
             currentLevel = currentLevel + 1;
-
-            if (currentLevel != levelNames.Length)
+            Debug.Log("Current Level:" + currentLevel + " Max: " + levelNames.Length);
+            if (currentLevel < levelNames.Length)
             {
                 SceneManager.LoadScene(levelNames[currentLevel]);
             }
-
-            // Text gameCompleteText = GameObject.FindGameObjectWithTag("CompleteText").GetComponent<Text>();
-            // gameCompleteText.color = Color.yellow;
-            // Debug.Log(gameCompleteText.text);
-            // Time.timeScale = 0;
         }
 	}
 

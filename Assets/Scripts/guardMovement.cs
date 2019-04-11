@@ -41,8 +41,6 @@ public class guardMovement : MonoBehaviour {
             {
                 RaycastHit hit;
                 Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, guardVisionBall.radius);
-                Debug.DrawRay(transform.position + transform.up, direction.normalized, Color.red, 10, false);
-                Debug.Log(hit.collider.tag);
                 if (hit.collider.gameObject == playerObject)
                     {
                         foundPlayer = true;
@@ -76,9 +74,8 @@ public class guardMovement : MonoBehaviour {
      
         if (yCoord != 1)
         {
-            StartCoroutine(PauseFor(yCoord));
-            Debug.Log(yCoord);
-            // PauseFor(yCoord);
+            StartCoroutine(PauseFor(yCoord - 1));
+            
         }
         agent.destination = waypoints[currentWaypoint].transform.position;
         currentWaypoint = currentWaypoint + 1;
@@ -92,9 +89,8 @@ public class guardMovement : MonoBehaviour {
 
     IEnumerator PauseFor(float seconds)
     {
-        Debug.Log("PLEASE PAUSE");
         agent.isStopped = true;
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(seconds);
         agent.isStopped = false;
     }
 
