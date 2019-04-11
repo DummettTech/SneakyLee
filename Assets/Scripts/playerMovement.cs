@@ -7,9 +7,11 @@ public class playerMovement : MonoBehaviour {
 
 	private Vector3 moveDirection = Vector3.zero;
 	private Rigidbody playerRigidbody;
-
+    private Animator playerAnimator;
+    
 	void Start () {
 		playerRigidbody = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
 	}
 	
 
@@ -19,8 +21,11 @@ public class playerMovement : MonoBehaviour {
 
 	// TODO: Add gravity, verticle solutions to levels would be fun
 	void move(float i, float j) {
-		moveDirection.Set (i, 0.0f, j);
-		//moveDirection = transform.TransformDirection (moveDirection);
+        bool isRunning = i != 0 || j != 0;
+        playerAnimator.SetBool("isRunning", isRunning);
+
+        moveDirection.Set (i, 0.0f, j);
+
 		moveDirection = moveDirection.normalized * speed * Time.deltaTime;
 		playerRigidbody.MovePosition (moveDirection + transform.position);
 
@@ -28,6 +33,6 @@ public class playerMovement : MonoBehaviour {
         {
             transform.forward = Vector3.Normalize(moveDirection);
         }
-
+        
     }
 }

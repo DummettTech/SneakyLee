@@ -58,7 +58,7 @@ public class gameController : MonoBehaviour {
 			RestartGame();
 		}
 
-        string[] levelNames = { "level_1", "level_2" };
+        string[] levelNames = { "level_1", "level_2", "level_3" };
         int currentLevel = 0;
         if (col.gameObject.tag == "Exit" && !isLocked) 
 		{

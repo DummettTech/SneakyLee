@@ -1,37 +1,54 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 using System.Collections;
 
 public class guardMovement : MonoBehaviour {
 
-    float persueSpeed;
+    public float fieldOfViewAngle = 140f;
+    SphereCollider guardVisionBall;
+
     GameObject playerObject;
     GameObject[] waypoints;
     NavMeshAgent agent;
     bool foundPlayer = false;
     public string route = "";
-
+    private Light guardLight;
     int currentWaypoint = 0;
 
+    float pursueSpeed;
     void Start () {
-
         string routeName = "Waypoint" + route;
+
 		playerObject = GameObject.FindGameObjectWithTag ("Player");
 		agent = GetComponent<NavMeshAgent> ();
         waypoints = GameObject.FindGameObjectsWithTag(routeName);
-
-        persueSpeed = agent.speed + 2.0f;
+        guardLight = GetComponentInChildren<Light>();
+        guardVisionBall = GetComponent<SphereCollider>();
+        pursueSpeed = agent.speed + 2.0f;
 	}
 	
-    private void OnTriggerEnter(Collider col)
+    private void OnTriggerStay(Collider col)
     {
         if(col.gameObject.tag == "Player")
         {
-            NavMeshHit hit;
-            agent.Raycast(playerObject.transform.position, out hit);
-            if (!hit.hit)
+
+
+            Vector3 direction = col.transform.position - transform.position;
+            float angle = Vector3.Angle(direction, transform.forward);
+
+            if(angle < fieldOfViewAngle * 0.5f)
             {
-                foundPlayer = true;
+                RaycastHit hit;
+                Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, guardVisionBall.radius);
+                Debug.DrawRay(transform.position + transform.up, direction.normalized, Color.red, 10, false);
+                Debug.Log(hit.collider.tag);
+                if (hit.collider.gameObject == playerObject)
+                    {
+                        foundPlayer = true;
+                        guardLight.color = Color.red;
+                    }
+
             }
         }
     }
@@ -41,7 +58,7 @@ public class guardMovement : MonoBehaviour {
 
         if (foundPlayer)
         {
-            persuePlayer();
+            pursuePlayer();
         } else
         {
             if(!agent.pathPending && agent.remainingDistance < 0.5f)
@@ -55,17 +72,30 @@ public class guardMovement : MonoBehaviour {
     void patrol ()
     {
         if (currentWaypoint >= waypoints.Length) currentWaypoint = 0;
-
+        float yCoord = waypoints[currentWaypoint].transform.localScale.y;
+     
+        if (yCoord != 1)
+        {
+            StartCoroutine(PauseFor(yCoord));
+            Debug.Log(yCoord);
+            // PauseFor(yCoord);
+        }
         agent.destination = waypoints[currentWaypoint].transform.position;
         currentWaypoint = currentWaypoint + 1;
     }
 
-	void persuePlayer() {
-        agent.speed = persueSpeed;
-
+	void pursuePlayer() {
+        agent.speed = pursueSpeed;
         // depending on how it plays, might want to change speed when persuing
 		agent.destination = playerObject.transform.position;
 	}
 
+    IEnumerator PauseFor(float seconds)
+    {
+        Debug.Log("PLEASE PAUSE");
+        agent.isStopped = true;
+        yield return new WaitForSeconds(4f);
+        agent.isStopped = false;
+    }
 
 }
