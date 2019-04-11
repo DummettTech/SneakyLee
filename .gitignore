@@ -10,6 +10,7 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
+Build/
 Temp/
 # Windows Installer files
 *.cab
@@ -23,5 +24,3 @@ Temp/
 # =========================
 # Operating System Files
 # =========================
-Build/SneakyLee_Data/sharedassets0.assets.resS
-Build/SneakyLee_Data/sharedassets0.assets.resS
