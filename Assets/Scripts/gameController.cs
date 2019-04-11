@@ -5,19 +5,53 @@ using UnityEngine.SceneManagement;
 
 public class gameController : MonoBehaviour {
 
-    Animator anim;
+    int keysToFind;
+    int keysCollected;
 
+    GameObject doorObject;
+
+    void Start()
+    {
+        doorObject = GameObject.FindGameObjectWithTag("Exit");
+
+        keysToFind = GameObject.FindGameObjectsWithTag("Key").Length;
+        if(keysToFind != 0)
+        {
+            lockDoor();
+        }
+    }
+
+    bool isLocked = false;
+    void lockDoor()
+    {
+        isLocked = true;
+        doorObject.GetComponentInChildren<Light>().color = Color.red;
+    }
+
+    void unlockDoor()
+    {
+        isLocked = false;
+        doorObject.GetComponentInChildren<Light>().color = Color.green;
+        doorObject.GetComponent<Animator>().SetBool("IsOpen", true); 
+    }
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Key")
         {
-            col.gameObject.GetComponent<Animator>().SetTrigger("Collected");
+            Destroy(col.gameObject);
+            keysCollected = keysCollected + 1;
+            Debug.Log("Keys to Find:" + keysToFind + "  Keys Found:" + keysCollected);
+            if (keysCollected == keysToFind)
+            {
+                unlockDoor();
+            }
         }
     }
 
     void OnCollisionEnter(Collision col)
 	{
+
 		if (col.gameObject.tag == "Guard") 
 		{
 			// Game Over
@@ -26,7 +60,7 @@ public class gameController : MonoBehaviour {
 
         string[] levelNames = { "level_1", "level_2" };
         int currentLevel = 0;
-        if (col.gameObject.tag == "Exit") 
+        if (col.gameObject.tag == "Exit" && !isLocked) 
 		{
             // Next Level / WIN!
             currentLevel = currentLevel + 1;
@@ -57,8 +91,10 @@ public class gameController : MonoBehaviour {
 
 	void RestartGame()
 	{
-		Scene currentScene = SceneManager.GetActiveScene ();
+        keysCollected = 0;
+        Scene currentScene = SceneManager.GetActiveScene ();
 		SceneManager.LoadScene (currentScene.name);
         Time.timeScale = 1;
+        
     }
 }
