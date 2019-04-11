@@ -3,13 +3,14 @@ Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
 
+Library/PlayerDataCache/Win/Data/
 # Folder config file
 Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-Temp/
 
+Temp/
 # Windows Installer files
 *.cab
 *.msi
