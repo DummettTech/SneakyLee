@@ -5,6 +5,9 @@ SceneListBegin?
 Assets/MainMenu.unity
 Assets/Levels/Level_1.unity
 Assets/Levels/Level_2.unity
+Assets/Levels/Level_3.unity
+Assets/Levels/Level_4.unity
+Assets/Levels/Level_5.unity
 Assets/Levels/Hardest.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret

@@ -16,9 +16,12 @@ public class gameController : MonoBehaviour {
     {
         currentScene = SceneManager.GetActiveScene();
 
-
+        // TODO: replace manual list with itterating through addedScenes with name substring "Level" / buildOrder != 0
         allScenes.AddLast("Level_1");
+        allScenes.AddLast("Level_3");
         allScenes.AddLast("Level_2");
+        allScenes.AddLast("Level_4");
+        allScenes.AddLast("Level_5");
         allScenes.AddLast("Hardest");
 
         doorObject = GameObject.FindGameObjectWithTag("Exit");
@@ -26,6 +29,7 @@ public class gameController : MonoBehaviour {
 
         if(keysToFind != 0)
         {
+            // this allows a level to start with no keys 
             lockDoor();
         }
     }
@@ -85,6 +89,7 @@ public class gameController : MonoBehaviour {
         else
         {
             // Win!
+            // TODO: Add intergration with the congratz HUD I've got hidden in all scenes
             GotToMainMenu();
         }
     }

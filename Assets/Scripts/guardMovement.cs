@@ -2,6 +2,7 @@
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 public class guardMovement : MonoBehaviour {
 
@@ -22,7 +23,7 @@ public class guardMovement : MonoBehaviour {
 
 		playerObject = GameObject.FindGameObjectWithTag ("Player");
 		agent = GetComponent<NavMeshAgent> ();
-        waypoints = GameObject.FindGameObjectsWithTag(routeName);
+        waypoints = GameObject.FindGameObjectsWithTag(routeName).OrderBy( go => go.name).ToArray();
         guardLight = GetComponentInChildren<Light>();
         guardVisionBall = GetComponent<SphereCollider>();
         pursueSpeed = agent.speed + 2.0f;
@@ -65,9 +66,10 @@ public class guardMovement : MonoBehaviour {
 
     void patrol ()
     {
+        Debug.Log("Lenght:" + waypoints.Length + "\n Cuurrent:" + currentWaypoint + "\n destinationName" + waypoints[currentWaypoint].name);
         if (currentWaypoint >= waypoints.Length) currentWaypoint = 0;
         float yCoord = waypoints[currentWaypoint].transform.localScale.y;
-     
+        
         if (yCoord != 1)
         {
             StartCoroutine(PauseFor(yCoord - 1));
