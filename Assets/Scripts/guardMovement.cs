@@ -8,7 +8,7 @@ public class guardMovement : MonoBehaviour {
 
     public float fieldOfViewAngle = 140f;
     SphereCollider guardVisionBall;
-
+    public bool isStill = false;
     GameObject playerObject;
     GameObject[] waypoints;
     NavMeshAgent agent;
@@ -27,6 +27,9 @@ public class guardMovement : MonoBehaviour {
         guardLight = GetComponentInChildren<Light>();
         guardVisionBall = GetComponent<SphereCollider>();
         pursueSpeed = agent.speed + 2.0f;
+
+        // holds the guard in place if the unit is being used as a static guard but allows for rotation
+        agent.updatePosition = !isStill;
 	}
 	
     private void OnTriggerStay(Collider col)
@@ -49,7 +52,15 @@ public class guardMovement : MonoBehaviour {
         }
     }
 
-	void Update () {
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Guard")
+        {
+            agent.Warp(agent.nextPosition);
+        }
+    }
+
+    void Update () {
 
         if (foundPlayer)
         {
@@ -74,7 +85,8 @@ public class guardMovement : MonoBehaviour {
             StartCoroutine(PauseFor(yCoord - 1));
             
         }
-        agent.destination = waypoints[currentWaypoint].transform.position;
+
+        agent.SetDestination(waypoints[currentWaypoint].transform.position);
         currentWaypoint = currentWaypoint + 1;
     }
 
