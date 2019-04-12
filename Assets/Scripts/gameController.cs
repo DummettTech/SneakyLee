@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class gameController : MonoBehaviour {
@@ -9,12 +9,21 @@ public class gameController : MonoBehaviour {
     int keysCollected;
 
     GameObject doorObject;
+    LinkedList<string> allScenes = new LinkedList<string>();
+    Scene currentScene;
 
     void Start()
     {
-        doorObject = GameObject.FindGameObjectWithTag("Exit");
+        currentScene = SceneManager.GetActiveScene();
 
+
+        allScenes.AddLast("Level_1");
+        allScenes.AddLast("Level_2");
+        allScenes.AddLast("Hardest");
+
+        doorObject = GameObject.FindGameObjectWithTag("Exit");
         keysToFind = GameObject.FindGameObjectsWithTag("Key").Length;
+
         if(keysToFind != 0)
         {
             lockDoor();
@@ -48,9 +57,7 @@ public class gameController : MonoBehaviour {
             }
         }
     }
-
-    static int currentLevel = 0;
-    string[] levelNames = { "level_1", "level_2", "level_3" };
+ 
 
     void OnCollisionEnter(Collision col)
 	{
@@ -63,31 +70,51 @@ public class gameController : MonoBehaviour {
         if (col.gameObject.tag == "Exit" && !isLocked) 
 		{
             // Next Level / WIN!
-            currentLevel = currentLevel + 1;
-            Debug.Log("Current Level:" + currentLevel + " Max: " + levelNames.Length);
-            if (currentLevel < levelNames.Length)
-            {
-                SceneManager.LoadScene(levelNames[currentLevel]);
-            }
+            NextLevel();
         }
 	}
+
+    void NextLevel ()
+    {
+
+        if (currentScene.name != allScenes.Last.Value)
+        {
+            // Next Level              
+            SceneManager.LoadScene(allScenes.Find(currentScene.name).Next.Value);
+        }
+        else
+        {
+            // Win!
+            GotToMainMenu();
+        }
+    }
+
+    void GotToMainMenu ()
+    {
+        // Might be good to add transition to this
+        SceneManager.LoadScene("MainMenu");
+    }
 
 	void Update()
 	{
 		if (Input.GetKey ("escape")) 
 		{
-			Application.Quit ();
+            GotToMainMenu();
 		}
         if (Input.GetKey("r"))
         {
             RestartGame();
+        }
+        if (Input.GetKey("n"))
+        {
+            // could re-add && (Debug.isDebugBuild || Application.isEditor) to make this "cheaty"
+            NextLevel();
         }
     }
 
 	void RestartGame()
 	{
         keysCollected = 0;
-        Scene currentScene = SceneManager.GetActiveScene ();
 		SceneManager.LoadScene (currentScene.name);
         Time.timeScale = 1;
         

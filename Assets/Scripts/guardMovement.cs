@@ -32,8 +32,6 @@ public class guardMovement : MonoBehaviour {
     {
         if(col.gameObject.tag == "Player")
         {
-
-
             Vector3 direction = col.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
 
@@ -46,12 +44,10 @@ public class guardMovement : MonoBehaviour {
                         foundPlayer = true;
                         guardLight.color = Color.red;
                     }
-
             }
         }
     }
 
-    
 	void Update () {
 
         if (foundPlayer)
