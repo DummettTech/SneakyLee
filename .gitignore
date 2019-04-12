@@ -15,6 +15,7 @@ Temp/
 Logs/
 obj/
 .vs/
+[lL]ibrary/
 
 # Windows Installer files
 *.cab

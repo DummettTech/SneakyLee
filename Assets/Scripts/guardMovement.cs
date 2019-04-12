@@ -23,7 +23,7 @@ public class guardMovement : MonoBehaviour {
 
 		playerObject = GameObject.FindGameObjectWithTag ("Player");
 		agent = GetComponent<NavMeshAgent> ();
-        waypoints = GameObject.FindGameObjectsWithTag(routeName).OrderBy( go => go.name).ToArray();
+        waypoints = GameObject.FindGameObjectsWithTag(routeName).OrderBy( gameObject => gameObject.name).ToArray();
         guardLight = GetComponentInChildren<Light>();
         guardVisionBall = GetComponent<SphereCollider>();
         pursueSpeed = agent.speed + 2.0f;
@@ -56,7 +56,7 @@ public class guardMovement : MonoBehaviour {
             pursuePlayer();
         } else
         {
-            if(!agent.pathPending && agent.remainingDistance < 0.5f)
+            if((!agent.pathPending && agent.remainingDistance < 0.5f) && waypoints.Length != 0)
             {
                 patrol();
             }
@@ -66,7 +66,6 @@ public class guardMovement : MonoBehaviour {
 
     void patrol ()
     {
-        Debug.Log("Lenght:" + waypoints.Length + "\n Cuurrent:" + currentWaypoint + "\n destinationName" + waypoints[currentWaypoint].name);
         if (currentWaypoint >= waypoints.Length) currentWaypoint = 0;
         float yCoord = waypoints[currentWaypoint].transform.localScale.y;
         
@@ -83,7 +82,7 @@ public class guardMovement : MonoBehaviour {
         agent.speed = pursueSpeed;
         // depending on how it plays, might want to change speed when persuing
 		agent.destination = playerObject.transform.position;
-	}
+	}   
 
     IEnumerator PauseFor(float seconds)
     {
