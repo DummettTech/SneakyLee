@@ -64,6 +64,10 @@ public class guardMovement : MonoBehaviour {
 
         if (foundPlayer)
         {
+            if (isStill)
+            {
+                agent.updatePosition = true;
+            }
             pursuePlayer();
         } else
         {
