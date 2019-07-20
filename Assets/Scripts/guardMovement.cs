@@ -32,7 +32,7 @@ public class guardMovement : MonoBehaviour {
         agent.updatePosition = !isStill;
 	}
 	
-    private void OnTriggerStay(Collider col)
+    private void OnTriggerStay (Collider col)
     {
         if(col.gameObject.tag == "Player")
         {
@@ -52,7 +52,7 @@ public class guardMovement : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnCollisionEnter (Collision col)
     {
         if (col.gameObject.tag == "Guard")
         {
@@ -68,18 +68,18 @@ public class guardMovement : MonoBehaviour {
             {
                 agent.updatePosition = true;
             }
-            pursuePlayer();
+            PursuePlayer();
         } else
         {
             if((!agent.pathPending && agent.remainingDistance < 0.5f) && waypoints.Length != 0)
             {
-                patrol();
+                Patrol();
             }
         }
      
 	}
 
-    void patrol ()
+    void Patrol ()
     {
         if (currentWaypoint >= waypoints.Length) currentWaypoint = 0;
         float yCoord = waypoints[currentWaypoint].transform.localScale.y;
@@ -94,7 +94,7 @@ public class guardMovement : MonoBehaviour {
         currentWaypoint = currentWaypoint + 1;
     }
 
-	void pursuePlayer() {
+	void PursuePlayer() {
         agent.speed = pursueSpeed;
         // depending on how it plays, might want to change speed when persuing
 		agent.destination = playerObject.transform.position;

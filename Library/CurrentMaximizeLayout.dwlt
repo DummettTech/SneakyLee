@@ -23,10 +23,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 909, y: 548}
-  m_MaxSize: {x: 22004, y: 12048}
+  m_MinSize: {x: 917, y: 572}
+  m_MaxSize: {x: 22012, y: 12072}
   vertical: 0
-  controlID: 20401
+  controlID: 176
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -129,10 +129,10 @@ MonoBehaviour:
     y: 0
     width: 949
     height: 947
-  m_MinSize: {x: 202, y: 548}
-  m_MaxSize: {x: 4002, y: 12048}
+  m_MinSize: {x: 202, y: 572}
+  m_MaxSize: {x: 4002, y: 12072}
   vertical: 1
-  controlID: 20384
+  controlID: 70
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -152,8 +152,8 @@ MonoBehaviour:
     y: 0
     width: 949
     height: 368
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 224}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -400,8 +400,8 @@ MonoBehaviour:
     y: 368
     width: 949
     height: 328
-  m_MinSize: {x: 202, y: 224}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -516,7 +516,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 5e0affffd20cffff500fffff2811ffff5213ffff3015ffff5017ffff7819ffffa21bffff141effff6020ffff8222ffff0225ffff0c27ffffc83bffff183effff9040ffffe86affff686dffff726ffffffc89ffffa497ffffeacfffffdeebffffe4ebffffd4ecffffd6ecffffc6efffff22f2ffff70f4ffffd6fbffffe83d0000fe3d0000363e0000523e00005e3e0000643e0000923e00006c5b00003e5c0000f28c0000048d0000728d0000d08d0000de8d00005ec600000cc7000010e70000
+      m_ExpandedIDs: bafbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -604,20 +604,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Supercyan Character Pack Free Sample/Textures
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 52
   m_LastFolders:
-  - Assets/Supercyan Character Pack Free Sample/Textures
+  - Assets/Scripts
   m_LastFoldersGridSize: 52
   m_LastProjectPath: M:\SneakyLee\SneakyLee
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 30290000
-    m_LastClickedID: 10544
-    m_ExpandedIDs: 00000000402600004e2600005226000072260000742600008e2600007627000088270000ce2700002828000030280000b22800004c2d00004e2d0000502d000000ca9a3b
+    m_SelectedIDs: 74260000
+    m_LastClickedID: 9844
+    m_ExpandedIDs: 00000000402600004e2600005226000072260000742600008e2600008827000028280000b2280000242c0000262c0000282c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -645,7 +645,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000402600004e2600005226000072260000742600008e2600007627000088270000ce2700002828000030280000b22800004c2d00004e2d0000502d000000ca9a3b
+    m_ExpandedIDs: 00000000402600004e2600005226000072260000742600008e2600007627000088270000ce2700002828000030280000b2280000242c0000262c0000282c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -670,8 +670,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: aa260000
-    m_LastClickedInstanceID: 9898
+    m_SelectedInstanceIDs: b4250000
+    m_LastClickedInstanceID: 9652
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 7a250000182f00006c1c0000281f0000421f0000621f0000821f0000981f00004c23000064220000ce2100001e680000702600009c2b0000dca4fdffc02700006222000018bcfbff4224000070050000d40b0000282a00006e72000054350000780a0000020b000000000000ec090000
     m_RenameOverlay:

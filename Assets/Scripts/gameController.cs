@@ -12,7 +12,7 @@ public class gameController : MonoBehaviour {
     LinkedList<string> allScenes = new LinkedList<string>();
     Scene currentScene;
 
-    void Start()
+    private void Start ()
     {
         currentScene = SceneManager.GetActiveScene();
 
@@ -30,25 +30,26 @@ public class gameController : MonoBehaviour {
         if(keysToFind != 0)
         {
             // this allows a level to start with no keys 
-            lockDoor();
+            LockDoor();
         }
     }
 
     bool isLocked = false;
-    void lockDoor()
+
+    private void LockDoor ()
     {
         isLocked = true;
         doorObject.GetComponentInChildren<Light>().color = Color.red;
     }
 
-    void unlockDoor()
+    private void UnlockDoor ()
     {
         isLocked = false;
         doorObject.GetComponentInChildren<Light>().color = Color.green;
         doorObject.GetComponent<Animator>().SetBool("IsOpen", true); 
     }
 
-    private void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter (Collider col)
     {
         if (col.gameObject.tag == "Key")
         {
@@ -57,13 +58,12 @@ public class gameController : MonoBehaviour {
             Debug.Log("Keys to Find:" + keysToFind + "  Keys Found:" + keysCollected);
             if (keysCollected == keysToFind)
             {
-                unlockDoor();
+                UnlockDoor();
             }
         }
     }
- 
 
-    void OnCollisionEnter(Collision col)
+    private void OnCollisionEnter (Collision col)
 	{
 		if (col.gameObject.tag == "Guard") 
 		{
@@ -78,7 +78,7 @@ public class gameController : MonoBehaviour {
         }
 	}
 
-    void NextLevel ()
+    private void NextLevel ()
     {
 
         if (currentScene.name != allScenes.Last.Value)
@@ -94,13 +94,13 @@ public class gameController : MonoBehaviour {
         }
     }
 
-    void GotToMainMenu ()
+    private void GotToMainMenu()
     {
         // Might be good to add transition to this
         SceneManager.LoadScene("MainMenu");
     }
 
-	void Update()
+    private void Update ()
 	{
 		if (Input.GetKey ("escape")) 
 		{
@@ -117,7 +117,7 @@ public class gameController : MonoBehaviour {
         }
     }
 
-	void RestartGame()
+    private void RestartGame ()
 	{
         keysCollected = 0;
 		SceneManager.LoadScene (currentScene.name);
